@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('offres', function (Blueprint $table) {
+            $table->id();
+            $table->string('sujet');
+            $table->text('description');
+            $table->string('experience');
+            $table->string('niveauEtude');
+            $table->string('dateDeDebut');
+            $table->string('localisation');
+            $table->string('teletravail');
+            $table->boolean('isArchived')->default(false);
+            $table->foreignId('user_id')->constrained('users');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('offres');
+    }
+};
